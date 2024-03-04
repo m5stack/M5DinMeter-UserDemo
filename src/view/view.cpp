@@ -260,6 +260,7 @@ void view_create(FactoryTest* ft)
 
     // Config
     _launcher_menu->setConfig().renderInterval = 20;
+    _launcher_menu->setConfig().readInputInterval = 50;
     _launcher_menu->setPositionDuration(600);
     _launcher_menu->setPositionTransitionPath(EasingPath::easeOutBack);
     _launcher_menu->setShapeDuration(400);
