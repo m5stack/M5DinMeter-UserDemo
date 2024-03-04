@@ -42,6 +42,7 @@ static Transition2D* _batv_panel_transition = nullptr;
 static std::uint32_t _batv_time_count = 0;
 static char _batv[10] = {0};
 static int _last_enc_postion = 0;
+static bool _is_just_boot_in = true;
 
 class LauncherMenu : public SmoothOptions
 {
@@ -71,6 +72,16 @@ class LauncherMenu : public SmoothOptions
             // printf("%d\n", _last_enc_postion);
             // printf("%d\n", (int)_ft->_enc.getPosition());
             // printf("%d\n", _ft->_enc.getCount());
+        }
+
+        // If just boot in, lock until button released
+        if (_is_just_boot_in)
+        {
+            // If not pressing
+            if (_ft->_btn_pwr.read())
+            {
+                _is_just_boot_in = false;
+            }
         }
 
         // If select
@@ -173,7 +184,7 @@ class LauncherMenu : public SmoothOptions
     void onClick() override
     {
         // Set open anim
-        setDuration(200);
+        setDuration(300);
         setTransitionPath(EasingPath::easeOutQuad);
 
         open({-20, -20, 280, 175});
