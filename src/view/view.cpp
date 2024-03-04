@@ -165,23 +165,28 @@ class LauncherMenu : public SmoothOptions
 
     void onPress() override
     {
-        // Press transition config
+        // Set press anim
         setDuration(200);
         setTransitionPath(EasingPath::easeOutQuad);
     }
 
     void onClick() override
     {
-        // Open option
-        setPositionDuration(600);
-        setPositionTransitionPath(EasingPath::easeOutBack);
-        setShapeDuration(400);
+        // Set open anim
+        setDuration(200);
+        setTransitionPath(EasingPath::easeOutQuad);
+
         open({-20, -20, 280, 175});
     }
 
     void onOpenEnd() override
     {
         _open_app();
+
+        // Reset anim
+        setPositionDuration(600);
+        setPositionTransitionPath(EasingPath::easeOutBack);
+        setShapeDuration(400);
 
         // Close option
         close();
